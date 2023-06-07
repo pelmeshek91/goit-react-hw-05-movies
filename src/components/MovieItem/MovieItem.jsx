@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+import { Suspense, useRef } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { AddInfo, MovieDesc, MovieInfo, StyledBtn } from './MovieItem.styled';
 
@@ -13,13 +13,13 @@ const MovieItem = ({
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
-
+  const backLinkLocationRef = useRef(location?.state?.from ?? '/');
   const handleClick = route => {
     navigate(route);
   };
 
   const onBtnClick = () => {
-    navigate(location?.state?.from ?? '/');
+    navigate(backLinkLocationRef.current);
   };
 
   return (

@@ -6,21 +6,16 @@ import { searchMovie } from 'services/movies-api';
 
 const MoviesPage = () => {
   const [moviesList, setMoviesList] = useState(null);
-  const [query, setQuery] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const queryBySearch = useMemo(
-    () => searchParams.get('search') ?? '',
+  const querySearch = useMemo(
+    () => searchParams.get('query') ?? '',
     [searchParams]
   );
 
-  const resultBySearch = () => {
-    setQuery(queryBySearch);
-  };
-
   useEffect(() => {
-    query && getMovieBySearch(query);
-  }, [query]);
+    querySearch && getMovieBySearch(querySearch);
+  }, [querySearch]);
 
   const getMovieBySearch = async query => {
     try {
@@ -31,13 +26,13 @@ const MoviesPage = () => {
     }
   };
 
+  const resultBySearch = data => {
+    setSearchParams(data);
+  };
+
   return (
     <div>
-      <SearchForm
-        resultBySearch={resultBySearch}
-        setSearchParams={setSearchParams}
-        querySearch={queryBySearch}
-      />
+      <SearchForm resultBySearch={resultBySearch} />
       {moviesList && <MoviesList moviesList={moviesList} />}
     </div>
   );

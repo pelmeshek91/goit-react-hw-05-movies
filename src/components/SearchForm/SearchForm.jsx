@@ -1,14 +1,17 @@
+import { useState } from 'react';
 import { Button, Form, Input } from './SearchForm.styled';
 
-const SearchForm = ({ resultBySearch, setSearchParams, querySearch }) => {
+const SearchForm = ({ resultBySearch }) => {
+  const [search, setSearch] = useState('');
+
   const handleChange = ({ target: { value } }) => {
-    const nextParams = value !== '' ? { search: value } : {};
-    setSearchParams(nextParams);
+    const nextParams = value !== '' ? { query: value } : {};
+    setSearch(nextParams);
   };
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    resultBySearch();
+    resultBySearch(search);
   };
 
   return (
@@ -18,7 +21,7 @@ const SearchForm = ({ resultBySearch, setSearchParams, querySearch }) => {
           onChange={handleChange}
           type="text"
           name="search"
-          value={querySearch}
+          value={search?.query ? search.query : ''}
         />
       </label>
       <Button>Search</Button>
