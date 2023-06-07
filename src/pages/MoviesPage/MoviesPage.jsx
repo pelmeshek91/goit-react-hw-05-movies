@@ -32,7 +32,7 @@ const MoviesPage = () => {
 
   return (
     <div>
-      <SearchForm resultBySearch={resultBySearch} querySearch={querySearch} />
+      <SearchForm resultBySearch={resultBySearch}/>
       {moviesList && <MoviesList moviesList={moviesList} />}
     </div>
   );
