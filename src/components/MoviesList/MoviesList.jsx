@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import { MovieTitle } from './MovieList.styled';
 
 const MoviesList = ({ moviesList }) => {
   const location = useLocation();
@@ -11,7 +12,7 @@ const MoviesList = ({ moviesList }) => {
           to={location.pathname === '/movies' ? `${id}` : `movies/${id}`}
           state={{ from: location }}
         >
-          <li>{title || original_name}</li>
+          <MovieTitle>{title || original_name}</MovieTitle>
         </Link>
       ))}
     </ul>

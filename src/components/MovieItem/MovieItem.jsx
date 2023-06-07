@@ -1,4 +1,6 @@
+import { Suspense } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { AddInfo, MovieDesc, MovieInfo, StyledBtn } from './MovieItem.styled';
 
 const MovieItem = ({
   poster_path,
@@ -21,37 +23,41 @@ const MovieItem = ({
   };
 
   return (
-    <div>
-      <button type="button" onClick={onBtnClick}>
+    <>
+      <StyledBtn type="button" onClick={onBtnClick}>
         Go back
-      </button>
-      <div>
-        {poster_path && (
-          <img
-            src={`https://image.tmdb.org/t/p/w300${poster_path}`}
-            alt={title}
-          />
-        )}
-      </div>
-      <div>
-        <h2>
-          {title} ({new Date(release_date).getFullYear()})
-        </h2>
-        <p>User score: {Math.round(vote_average * 10)}%</p>
-        <h3>Overview</h3>
-        <p>{overview}</p>
-        <h3>Genres</h3>
-        <p>{genres.map(genre => genre.name).join(' ')}</p>
-      </div>
-      <div>
-        <p>Additional information</p>
-      </div>
+      </StyledBtn>
+      <MovieInfo>
+        <div>
+          {poster_path && (
+            <img
+              src={`https://image.tmdb.org/t/p/w300${poster_path}`}
+              alt={title}
+              width="250"
+            />
+          )}
+        </div>
+        <MovieDesc>
+          <h2>
+            {title} ({new Date(release_date).getFullYear()})
+          </h2>
+          <p>User score: {Math.round(vote_average * 10)}%</p>
+          <h3>Overview</h3>
+          <p>{overview}</p>
+          <h3>Genres</h3>
+          <p>{genres.map(genre => genre.name).join(' ')}</p>
+        </MovieDesc>
+      </MovieInfo>
+
       <>
-        <button onClick={() => handleClick('cast')}>Cast </button>
-        <button onClick={() => handleClick('reviews')}>Reviews </button>
+        <AddInfo>Additional information</AddInfo>
+        <StyledBtn onClick={() => handleClick('cast')}>Cast </StyledBtn>
+        <StyledBtn onClick={() => handleClick('reviews')}>Reviews </StyledBtn>
       </>
-      <Outlet />
-    </div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </Suspense>
+    </>
   );
 };
 

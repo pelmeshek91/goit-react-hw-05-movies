@@ -1,3 +1,5 @@
+import { Button, Form, Input } from './SearchForm.styled';
+
 const SearchForm = ({ resultBySearch, setSearchParams, querySearch }) => {
   const handleChange = ({ target: { value } }) => {
     const nextParams = value !== '' ? { search: value } : {};
@@ -10,17 +12,17 @@ const SearchForm = ({ resultBySearch, setSearchParams, querySearch }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <label>
-        <input
+        <Input
           onChange={handleChange}
           type="text"
           name="search"
           value={querySearch}
         />
       </label>
-      <button>Search</button>
-    </form>
+      <Button>Search</Button>
+    </Form>
   );
 };
 

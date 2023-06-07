@@ -1,7 +1,9 @@
 import Loader from 'components/Loader/Loader';
+import { UpdateLoader } from 'components/Loader/Loader.styled';
 import MoviesList from 'components/MoviesList/MoviesList';
 import { useEffect, useState } from 'react';
 import { getTrendingMovies } from 'services/movies-api';
+import { Title } from './HomePage.styled';
 
 const HomePage = () => {
   const [trandingList, setTrandingList] = useState(null);
@@ -26,10 +28,12 @@ const HomePage = () => {
   return (
     <>
       {trandingList && loader ? (
-        <Loader />
+        <UpdateLoader>
+          <Loader />
+        </UpdateLoader>
       ) : (
         <>
-          <h1>Trandig today</h1>
+          <Title>Trandig today</Title>
           <MoviesList moviesList={trandingList} />
         </>
       )}
