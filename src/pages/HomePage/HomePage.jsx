@@ -28,7 +28,10 @@ const HomePage = () => {
       {trandingList && loader ? (
         <Loader />
       ) : (
-        <MoviesList trandingList={trandingList} />
+        <>
+          <h1>Trandig today</h1>
+          <MoviesList moviesList={trandingList} />
+        </>
       )}
     </>
   );
