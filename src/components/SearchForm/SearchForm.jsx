@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button, Form, Input } from './SearchForm.styled';
 
-const SearchForm = ({ resultBySearch, querySearch }) => {
+const SearchForm = ({ resultBySearch }) => {
   const [search, setSearch] = useState('');
 
   const handleChange = ({ target: { value } }) => {
@@ -21,7 +21,7 @@ const SearchForm = ({ resultBySearch, querySearch }) => {
           onChange={handleChange}
           type="text"
           name="search"
-          value={search?.query ? search.query : querySearch}
+          value={search?.query ? search.query : ''}
         />
       </label>
       <Button>Search</Button>
