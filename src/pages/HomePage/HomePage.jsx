@@ -6,7 +6,7 @@ import { getTrendingMovies } from 'services/movies-api';
 import { Title } from './HomePage.styled';
 
 const HomePage = () => {
-  const [trandingList, setTrandingList] = useState(null);
+  const [trendingList, setTrendingList] = useState(null);
   const [loader, setLoader] = useState(false);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const HomePage = () => {
     setLoader(true);
     try {
       const { results } = await getTrendingMovies();
-      setTrandingList(results);
+      setTrendingList(results);
     } catch (error) {
       console.log(error);
     } finally {
@@ -27,14 +27,14 @@ const HomePage = () => {
 
   return (
     <>
-      {trandingList && loader ? (
+      {trendingList && loader ? (
         <UpdateLoader>
           <Loader />
         </UpdateLoader>
       ) : (
         <>
-          <Title>Trandig today</Title>
-          <MoviesList moviesList={trandingList} />
+          <Title>Trending today</Title>
+          <MoviesList moviesList={trendingList} />
         </>
       )}
     </>
